@@ -59,7 +59,7 @@ def main():
     if times_found is None:
         print("\nCould not connect. Check your internet and try again.")
     elif times_found > 0:
-        print(f"\n[!]BREACHED Found {times_found:,} times in data breaches.")
+        print(f"\n[!] BREACHED Found {times_found:,} times in data breaches.")
         print("Never use this password anywhere.")
     else:
         print("\n[OK] Not found in known breaches.")
