@@ -8,7 +8,8 @@ A 10-day challenge: building one ethical security tool in Python every day.
 |-----|------|--------|
 | 1 | Password Strength Checker | ✅ Done |
 | 2 | Breach Checker | ✅ Done |
-| 3 | Hash Generator + File Integrity Checker | ⏳ Coming soon |
+| 3 | Hash Generator + File Integrity Checker | ✅ Done |
+| 4 | Port Scanner | ⏳ Coming soon |
 
 ## Day 1: Password Strength Checker
 
@@ -80,8 +81,46 @@ Never use this password anywhere.
 - Calling a web API with Python's built-in `urllib`
 - Handling errors with `try` / `except`
 
+## Day 3: Hash Generator + File Integrity Checker
+
+Creates SHA-256 fingerprints of text and files, and detects when a file has been **modified, deleted or added**.
+
+### Features
+- Hash any text with SHA-256
+- Hash any file (read in small blocks, so even huge files work)
+- Create a **baseline** of every file in a folder
+- Compare a folder to its baseline and report tampering
+
+### How to run
+```bash
+python hash_tools/hash_tools.py
+```
+
+### Try it yourself
+```bash
+mkdir sample_files
+Set-Content sample_files/note.txt "Hello, this is my important note."
+python hash_tools/hash_tools.py
+```
+1. Choose `3` and enter `sample_files` to create a baseline
+2. Edit `note.txt`
+3. Choose `4` and enter `sample_files` to see it flagged
+
+### Example
+```
+[!] MODIFIED: sample_files\note.txt
+[!] DELETED:  sample_files\records.txt
+[+] NEW FILE: sample_files\virus.txt
+```
+
+### What I learned
+- SHA-256 vs SHA-1: why stronger hashes matter for integrity
+- Reading files in blocks so large files don't use all the memory
+- Saving and loading data with JSON
+- Hashing proves a file wasn't changed, while encryption hides it
+
 ## ⚠️ Ethical use
-This project is for **educational purposes only**. Only test passwords you own, and never use real passwords in screenshots.
+This project is for **educational purposes only**. Only test passwords and files you own, and never use real passwords in screenshots.
 
 ## Author
 Built by [@dosunmuemmanuel157-sketch](https://github.com/dosunmuemmanuel157-sketch) while studying cybersecurity.
