@@ -9,7 +9,8 @@ A 10-day challenge: building one ethical security tool in Python every day.
 | 1 | Password Strength Checker | ✅ Done |
 | 2 | Breach Checker | ✅ Done |
 | 3 | Hash Generator + File Integrity Checker | ✅ Done |
-| 4 | Port Scanner | ⏳ Coming soon |
+| 4 | Port Scanner | ✅ Done |
+| 5 | Threading + Banner Grabbing | ⏳ Coming soon |
 
 ## Day 1: Password Strength Checker
 
@@ -119,8 +120,45 @@ python hash_tools/hash_tools.py
 - Saving and loading data with JSON
 - Hashing proves a file wasn't changed, while encryption hides it
 
+## Day 4: Port Scanner
+
+Checks which TCP ports are open on a computer and names the common services behind them.
+
+### Features
+- Scans a range of ports using TCP connections
+- Labels well-known ports (SSH, HTTP, HTTPS, RDP and more)
+- **Safety check:** scans your own machine by default and asks for explicit confirmation before scanning anything else
+- Times the scan, as a baseline for speed improvements
+
+### How to run
+```bash
+python port_scanner/port_scanner.py
+```
+
+### Try it safely on your own machine
+In one terminal, open a test port that only your computer can reach:
+```bash
+python -m http.server 8000 --bind 127.0.0.1
+```
+In a second terminal, run the scanner, press Enter for the host, then scan ports `7990` to `8010`.
+
+### Example
+```
+--- RESULTS ---
+[OPEN] Port 8000: HTTP dev server (Python)
+
+Scanned 21 ports in 10.3 seconds.
+```
+
+### What I learned
+- What ports are and how TCP connections work
+- Why port scanning is the first step of reconnaissance, and why defenders use it too
+- Using Python's `socket` module with timeouts
+- Why scanning is slow one port at a time (threading comes next)
+- Why you must only scan machines you own or have written permission to test
+
 ## ⚠️ Ethical use
-This project is for **educational purposes only**. Only test passwords and files you own, and never use real passwords in screenshots.
+This project is for **educational purposes only**. Only test passwords, files and machines you own or have written permission to test. Scanning computers without permission can be illegal. Never use real passwords in screenshots.
 
 ## Author
 Built by [@dosunmuemmanuel157-sketch](https://github.com/dosunmuemmanuel157-sketch) while studying cybersecurity.
