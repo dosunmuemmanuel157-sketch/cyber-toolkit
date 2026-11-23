@@ -223,4 +223,5 @@ __marimo__/
 .streamlit/secrets.toml
 
 baseline.json
-sample_files/bank_data.json
+sample_files/
+bank_data.json
