@@ -1,164 +1,91 @@
-# 🔐 Cyber Toolkit
+# 🛡️ Cyber Toolkit
 
-A 10-day challenge: building one ethical security tool in Python every day.
+A 10-day **build in public** project: one beginner-friendly cybersecurity tool in Python every day.
 
-## Progress
+Built by a cybersecurity student learning ethical hacking, one tool at a time. 🚀
+
+---
+
+## 📅 Progress
 
 | Day | Tool | Status |
 |-----|------|--------|
 | 1 | Password Strength Checker | ✅ Done |
-| 2 | Breach Checker | ✅ Done |
-| 3 | Hash Generator + File Integrity Checker | ✅ Done |
+| 2 | Breach Checker (HIBP) | ✅ Done |
+| 3 | Hash Tools + File Integrity | ✅ Done |
 | 4 | Port Scanner | ✅ Done |
-| 5 | Threading + Banner Grabbing | ⏳ Coming soon |
+| 5 | Secure Mini Bank | ✅ Done |
+| 6 | Threading + Banner Grabbing | 🔜 Coming soon |
+| 7-10 | More tools | 🔜 Coming soon |
 
-## Day 1: Password Strength Checker
+---
 
-Checks how strong a password is and tells you how to improve it.
+## 🔐 Day 1: Password Strength Checker
+Checks how strong a password is.
+- Detects common passwords
+- Checks for upper/lowercase, numbers and symbols
+- Calculates entropy (how hard it is to guess)
 
-### Features
-- Detects passwords found in common hacker wordlists
-- Checks length and character variety (lowercase, uppercase, numbers, symbols)
-- Calculates **entropy** (in bits) to measure how hard it is to guess
-- Rates passwords from WEAK to VERY STRONG with improvement tips
-
-### How to run
 ```bash
 python password_checker/password_checker.py
 ```
 
-### Example
-```
-========================================
-   PASSWORD STRENGTH CHECKER
-========================================
-Enter a password: hello
+## 🕵️ Day 2: Breach Checker
+Checks if a password has appeared in a known data breach using the Have I Been Pwned API.
+- Uses **SHA-1 hashing**
+- Uses **k-anonymity**: only the first 5 characters of the hash are sent, so your real password never leaves your computer
 
-Rating:  WEAK
-Entropy: 23.5 bits
-
-How to improve:
-  - Use at least 8 characters (12+ is better).
-  - Add UPPERCASE letters.
-  - Add numbers.
-  - Add symbols like ! @ # $ %.
-```
-
-### What I learned
-- How dictionary attacks use common password lists
-- What entropy means and how it is calculated
-- Python functions, sets, dictionaries and f-strings
-
-## Day 2: Breach Checker
-
-Checks whether a password has appeared in a known data breach, **without sending the password anywhere**.
-
-### How it works
-1. Hashes the password with SHA-1
-2. Sends only the **first 5 characters** of the hash to the [Have I Been Pwned](https://haveibeenpwned.com/API/v3#PwnedPasswords) API (this technique is called **k-anonymity**)
-3. Receives about 800 possible matches
-4. Searches those matches **locally** for the rest of the hash
-5. Reports how many times the password was found in breaches
-
-### How to run
 ```bash
 python breach_checker/breach_checker.py
 ```
 
-### Example
-```
-========================================
-   BREACH CHECKER
-========================================
-Enter a password to check: password
+## #️⃣ Day 3: Hash Tools
+Hash text and files, then detect if a file has been changed.
+- Hash text with SHA-256
+- Hash any file
+- Create a baseline and check file integrity later
 
-[!] BREACHED! Found <count> times in data breaches.
-Never use this password anywhere.
-```
-
-### What I learned
-- How hashing works (SHA-1) and why hashes can't be reversed
-- How k-anonymity protects privacy
-- Calling a web API with Python's built-in `urllib`
-- Handling errors with `try` / `except`
-
-## Day 3: Hash Generator + File Integrity Checker
-
-Creates SHA-256 fingerprints of text and files, and detects when a file has been **modified, deleted or added**.
-
-### Features
-- Hash any text with SHA-256
-- Hash any file (read in small blocks, so even huge files work)
-- Create a **baseline** of every file in a folder
-- Compare a folder to its baseline and report tampering
-
-### How to run
 ```bash
 python hash_tools/hash_tools.py
 ```
 
-### Try it yourself
-```bash
-mkdir sample_files
-Set-Content sample_files/note.txt "Hello, this is my important note."
-python hash_tools/hash_tools.py
-```
-1. Choose `3` and enter `sample_files` to create a baseline
-2. Edit `note.txt`
-3. Choose `4` and enter `sample_files` to see it flagged
+## 🔎 Day 4: Port Scanner
+Scans a range of ports to see which ones are open.
+- Shows common service names (HTTP, SSH, etc.)
+- Asks for permission confirmation before scanning anything other than localhost
+- Shows how long the scan took
 
-### Example
-```
-[!] MODIFIED: sample_files\note.txt
-[!] DELETED:  sample_files\records.txt
-[+] NEW FILE: sample_files\virus.txt
-```
-
-### What I learned
-- SHA-256 vs SHA-1: why stronger hashes matter for integrity
-- Reading files in blocks so large files don't use all the memory
-- Saving and loading data with JSON
-- Hashing proves a file wasn't changed, while encryption hides it
-
-## Day 4: Port Scanner
-
-Checks which TCP ports are open on a computer and names the common services behind them.
-
-### Features
-- Scans a range of ports using TCP connections
-- Labels well-known ports (SSH, HTTP, HTTPS, RDP and more)
-- **Safety check:** scans your own machine by default and asks for explicit confirmation before scanning anything else
-- Times the scan, as a baseline for speed improvements
-
-### How to run
 ```bash
 python port_scanner/port_scanner.py
 ```
 
-### Try it safely on your own machine
-In one terminal, open a test port that only your computer can reach:
+## 🏦 Day 5: Secure Mini Bank
+A fake bank that shows how real systems protect PINs. **No real money, no real data.**
+- Create accounts and log in with a 4-digit PIN
+- PINs are **never stored in plain text**: they are salted and hashed with PBKDF2-HMAC-SHA256
+- Account locks after 3 wrong PIN attempts
+- PIN shows as `*` while typing
+- Deposit, withdraw, transfer and view transaction history in `$`
+- Constant-time PIN comparison (`hmac.compare_digest`)
+- Data is saved to a local `bank_data.json` (not uploaded to GitHub)
+
 ```bash
-python -m http.server 8000 --bind 127.0.0.1
-```
-In a second terminal, run the scanner, press Enter for the host, then scan ports `7990` to `8010`.
-
-### Example
-```
---- RESULTS ---
-[OPEN] Port 8000: HTTP dev server (Python)
-
-Scanned 21 ports in 10.3 seconds.
+python mini_bank/mini_bank.py
 ```
 
-### What I learned
-- What ports are and how TCP connections work
-- Why port scanning is the first step of reconnaissance, and why defenders use it too
-- Using Python's `socket` module with timeouts
-- Why scanning is slow one port at a time (threading comes next)
-- Why you must only scan machines you own or have written permission to test
+---
 
-## ⚠️ Ethical use
-This project is for **educational purposes only**. Only test passwords, files and machines you own or have written permission to test. Scanning computers without permission can be illegal. Never use real passwords in screenshots.
+## ⚖️ Ethical Use
+This project is for **learning and education only**.
+- Only scan or test systems you **own** or have **written permission** to test
+- Use fake data only. Never enter real passwords or PINs
+- The author is not responsible for misuse
 
-## Author
-Built by [@dosunmuemmanuel157-sketch](https://github.com/dosunmuemmanuel157-sketch) while studying cybersecurity.
+---
+
+## 👤 Author
+**Dosunmu Emmanuel**, Cybersecurity student at UNILAG
+
+GitHub: [dosunmuemmanuel157-sketch](https://github.com/dosunmuemmanuel157-sketch)
+
+Follow the journey on LinkedIn, X and Instagram. ⭐ Star the repo if it helps you!
