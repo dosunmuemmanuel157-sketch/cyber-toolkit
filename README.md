@@ -15,8 +15,11 @@ Built by a cybersecurity student learning ethical hacking, one tool at a time. �
 | 3 | Hash Tools + File Integrity | ✅ Done |
 | 4 | Port Scanner | ✅ Done |
 | 5 | Secure Mini Bank | ✅ Done |
-| 6 | Threading + Banner Grabbing | 🔜 Coming soon |
-| 7-10 | More tools | 🔜 Coming soon |
+| 6 | Phishing Link Analyzer | ✅ Done |
+| 7 | Failed-Login Log Analyzer | 🔜 Coming soon |
+| 8 | Port Scanner Upgrade (Threading + Banner Grabbing) | 🔜 Coming soon |
+| 9 | Menu UI combining all tools | 🔜 Coming soon |
+| 10 | Final README, demo and recap | 🔜 Coming soon |
 
 ---
 
@@ -72,6 +75,20 @@ A fake bank that shows how real systems protect PINs. **No real money, no real d
 ```bash
 python mini_bank/mini_bank.py
 ```
+
+## 🎣 Day 6: Phishing Link Analyzer
+Paste a link and get a risk score from 0 to 100, with the reasons.
+- Detects lookalike domains like `paypa1.com` and `g00gle.com`
+- Flags shortened links, raw IP addresses, the `@` trick, cheap domain endings and scam words
+- Shows 🚩 red flags (with points) and ✅ green flags (good signs)
+- Gives a clear verdict: 🟢 Low risk, 🟡 Suspicious or 🔴 Dangerous
+- **Only reads the text of the link. It never opens it.**
+
+```bash
+python phishing_checker/phishing_checker.py
+```
+
+> ⚠️ "Low risk" does not mean "safe". It means none of the checks fired. Real tools also check domain age and blocklists.
 
 ---
 
