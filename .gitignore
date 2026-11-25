@@ -225,3 +225,5 @@ __marimo__/
 baseline.json
 sample_files/
 bank_data.json
+
+sample_auth.log
