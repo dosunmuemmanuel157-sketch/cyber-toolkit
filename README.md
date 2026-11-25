@@ -16,7 +16,7 @@ Built by a cybersecurity student learning ethical hacking, one tool at a time. �
 | 4 | Port Scanner | ✅ Done |
 | 5 | Secure Mini Bank | ✅ Done |
 | 6 | Phishing Link Analyzer | ✅ Done |
-| 7 | Failed-Login Log Analyzer | 🔜 Coming soon |
+| 7 | Failed-Login Log Analyzer | ✅ Done |
 | 8 | Port Scanner Upgrade (Threading + Banner Grabbing) | 🔜 Coming soon |
 | 9 | Menu UI combining all tools | 🔜 Coming soon |
 | 10 | Final README, demo and recap | 🔜 Coming soon |
@@ -89,6 +89,21 @@ python phishing_checker/phishing_checker.py
 ```
 
 > ⚠️ "Low risk" does not mean "safe". It means none of the checks fired. Real tools also check domain age and blocklists.
+
+## 🕵️ Day 7: Failed-Login Log Analyzer
+Reads a server login log and finds brute-force attacks, like a SOC analyst would.
+- Creates a **fake** log in the style of Linux `sshd`, using reserved example IPs
+- Pulls out the time, result, username and IP from each line with regex
+- Counts failed logins per IP and measures how fast they happen
+- Scores each IP from 0 to 100 using red flags: many failures, machine speed, many usernames tried, and admin accounts targeted
+- Prints a report with 🔴 🟡 🟢 levels and defender advice
+- Only reads logs. It never changes them.
+
+```bash
+python log_analyzer/log_analyzer.py
+```
+
+> ⚠️ Only analyze logs from systems you own or have permission to test. The tool currently understands Linux `sshd` log lines only.
 
 ---
 
