@@ -17,7 +17,7 @@ Built by a cybersecurity student learning ethical hacking, one tool at a time. �
 | 5 | Secure Mini Bank | ✅ Done |
 | 6 | Phishing Link Analyzer | ✅ Done |
 | 7 | Failed-Login Log Analyzer | ✅ Done |
-| 8 | Port Scanner Upgrade (Threading + Banner Grabbing) | 🔜 Coming soon |
+| 8 | Port Scanner v2 (Threading + Banner Grabbing) | ✅ Done |
 | 9 | Menu UI combining all tools | 🔜 Coming soon |
 | 10 | Final README, demo and recap | 🔜 Coming soon |
 
@@ -104,6 +104,24 @@ python log_analyzer/log_analyzer.py
 ```
 
 > ⚠️ Only analyze logs from systems you own or have permission to test. The tool currently understands Linux `sshd` log lines only.
+
+## ⚡ Day 8: Port Scanner v2 (Threading + Banner Grabbing)
+An upgrade to the Day 4 scanner.
+- **Threading:** scans with 200 workers at once. In my test, 151 ports took 75 seconds one by one and 0.6 seconds with threads (about 118x faster)
+- **Banner grabbing:** reads the greeting that open ports send back (like `SSH-2.0-OpenSSH_7.2`), which can reveal software versions
+- Flags a few known older versions as hints to check CVE databases
+- Includes a built-in speed test and a safe **fake service** (`fake_service.py`) that runs only on your own computer (127.0.0.1) for practice
+- Asks for permission confirmation before scanning anything other than localhost
+
+```bash
+# Terminal 1: start the practice services
+python port_scanner/fake_service.py
+
+# Terminal 2: run the scanner
+python port_scanner/port_scanner_v2.py
+```
+
+> ⚠️ The version hints are a tiny hand-written list. Real pentesters check CVE databases and use tools like Nmap.
 
 ---
 
